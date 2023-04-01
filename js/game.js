@@ -23,9 +23,33 @@ class Game {
    * Lance une nouvelle partie (s'il n'y a pas déjà une partie en cours).
    */
   launchNewGame() {
-    throw new Error("(Méthode pas encore implémentée)");
-
     // TODO Compléter en Partie 1 ...
+
+    // si une partie est déjà en cours
+    if (this._gameInProgress) {
+      throw new Error("Il faut d'abord finir la partie en cours...")
+    }
+
+    // pas de partie en cours
+    // définir la partie comme en cours
+    this._gameInProgress = true;
+
+    // récupérer le mot à faire deviner
+    let wordToGuessObject = this.getNewWordObject();
+    // mettre à jours le modèle
+    // le mot à deviner
+    this._wordToGuess = wordToGuessObject.mot;
+    // le nombre d'erreur autorisé
+    this._nbErrorsAllowed = wordToGuessObject.nb_essais;
+    // les lettres utilisées, la première et dernière lettre
+    //    - la première
+    this._usedLetters = this._wordToGuess[0];
+    //    - la dernière lettre
+    let posLastLetter = this._wordToGuess.length-1;
+    this._usedLetters += this._wordToGuess[posLastLetter];
+    
+    // mettre à jour le mot à afficher
+    this._displayedWord = this.generateWordToDisplay(this._usedLetters, this._wordToGuess);
   }
 
   /**
