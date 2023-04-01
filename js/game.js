@@ -124,9 +124,23 @@ class Game {
     // si la lettre joué est présente
     if (this._wordToGuess.includes(letter)) {
       this.updateWordToDisplay();
-    } else {
+      // si fin de partie car mot trouvé, ajouté le nb d'erreurs restantes au score
+      if (this._wordToGuess === this._displayedWord) {
+        this._score += this._nbErrorsAllowed;
+        // arrêter la partie
+        this._gameInProgress = false;
+      }
+    } else { // mauvaise lettre
       // on enlève une possibilité d'erreur
       this._nbErrorsAllowed--;
+      // si fin de partie car plus d'erreurs possible
+      if (this._nbErrorsAllowed === -1) {
+        // enlever deux points au score
+        this._score -= 2;
+        // arrêter la partie
+        this._gameInProgress = false;
+      }
+
     }
 
   }
