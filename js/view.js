@@ -54,6 +54,19 @@ const view = {
    */
   updateFrom(game) {
     // TODO Compléter en Partie 1 ...
+
+    // le modèle game contient un mot à deviner
+    if (game._wordToGuess) {
+      // afficher le mot à afficher
+      view.word_input.value = game._displayedWord;
+      // afficher les lettres utilisés
+      view.used_letters_input.value = game._usedLetters;
+      // afficher le nombre d'erreurs permises
+      view.allowed_errors_input.value = game._nbErrorsAllowed;
+    }
+
+    // afficher le score du joueur
+    view.score_span.textContent = game._score;
   },
 
   /**
