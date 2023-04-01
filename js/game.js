@@ -134,7 +134,7 @@ class Game {
       // on enlève une possibilité d'erreur
       this._nbErrorsAllowed--;
       // si fin de partie car plus d'erreurs possible
-      if (this._nbErrorsAllowed === -1) {
+      if (this._nbErrorsAllowed === 0) {
         // enlever deux points au score
         this._score -= 2;
         // arrêter la partie
