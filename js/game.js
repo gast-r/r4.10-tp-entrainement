@@ -84,9 +84,20 @@ class Game {
    * @returns {string} Une chaine de la forme "E_E____T"
    */
   generateWordToDisplay(lettersToDisplay, wordToGuess) {
-    return "???";
-
     // TODO Compléter en Partie 1 ...
+
+    let wordToDisplay = "";
+    // pour chaque lettre du mot
+    for (let letter of wordToGuess) {
+      // si la lettre est dans les lettres utilisées, afficher la lettre
+      if (lettersToDisplay.includes(letter)) {
+        wordToDisplay += letter;
+      } else { // la lettre n'est pas dans les lettres utilisées
+        // afficher un tirer
+        wordToDisplay += '_';
+      }
+    }
+    return wordToDisplay;
   }
 
   /**
