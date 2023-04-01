@@ -20,3 +20,24 @@ document.addEventListener("DOMContentLoaded", () => {
   view.updateFrom(game);
 });
 
+/**
+ * Cache les message dans la vue et lance une nouvelle partie.
+ * @param {*} event 
+ */
+function onNewGameEvent(event) {
+  // cache tous les messages
+  view.hideMessages();
+
+  // lance une nouvelle partie dans le modèle
+  try {
+    game.launchNewGame();
+  } catch (e) {
+    view.displayMessage(e.message);
+  }
+
+  // demander à la vue de se mettre à jours
+  view.updateFrom(game);
+}
+// appel newGameEvent si click sur le boutton "Lancer une nouvelle partie"
+view.new_game_btn.addEventListener('click', onNewGameEvent);
+

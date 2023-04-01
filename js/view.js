@@ -35,7 +35,7 @@ const view = {
   /**
    * Bouton permettant de lancer une partie.
    */
-  new_game_btn: document.getElementById('boutton_nouvelle_partie'),
+  new_game_btn: document.getElementById('bouton_nouvelle_partie'),
 
   /**
    * Collection des boutons représentant le clavier virtuel intégré à la page.
