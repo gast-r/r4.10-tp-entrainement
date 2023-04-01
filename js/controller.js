@@ -50,6 +50,10 @@ function onNewGameEvent(event) {
  * @param {*} event Permet de retrouver la lettre qui a été cliqué, event.target
  */
 function onLetterClick(event) {
+  // récupérer le nombre de point si fin de partie
+  let nbPointBeforePlay = game._score;
+
+
   // cache tous les messages
   view.hideMessages();
 
@@ -63,7 +67,27 @@ function onLetterClick(event) {
     view.displayMessage(e.message);
   }
 
+  // mettre à jour la vue
   view.updateFrom(game);
+
+  // gérer la fin d'une partie
+  let nbPointAfterPlay = game._score;
+  let diffPoint = nbPointAfterPlay - nbPointBeforePlay;
+  // partie finie
+  if (game._gameInProgress === false) {
+    // si la partie est gagnante
+    if (game._wordToGuess == game._displayedWord) {
+      view.displayMessage(
+        `Bravo ! Le mot était bien ${game._wordToGuess}. Votre score a augmenté de ${diffPoint} point(s).`,
+        MESSAGE_TYPES.win
+        );
+    } else { // partie perdante
+      view.displayMessage(
+        `Perdu ! Le mot était ${game._wordToGuess} Votre score a diminué de 2 points.`,
+        MESSAGE_TYPES.lost
+        );
+    }
+  }
 }
 
 // **** LES LISTENNERS ****
