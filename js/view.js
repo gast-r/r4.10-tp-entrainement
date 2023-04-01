@@ -41,7 +41,7 @@ const view = {
    * Collection des boutons représentant le clavier virtuel intégré à la page.
    * (Tous les boutons avec la classe "lettre")
    */
-  letters_btns: document.getElementsByClassName('lettre'),
+  letters_btns: Array.from(document.getElementsByClassName('lettre')),
 
   /**
    * Élément <span> affichant le score actuel du joueur.

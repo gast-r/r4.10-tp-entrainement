@@ -20,6 +20,10 @@ document.addEventListener("DOMContentLoaded", () => {
   view.updateFrom(game);
 });
 
+// -- MES AJOUTS ---
+
+// **** FONCTIONS UTILES AUX LISTENNERs ****
+
 /**
  * Cache les message dans la vue et lance une nouvelle partie.
  * @param {*} event 
@@ -38,6 +42,37 @@ function onNewGameEvent(event) {
   // demander à la vue de se mettre à jours
   view.updateFrom(game);
 }
+
+/**
+ * Cache tous les messages,
+ * joue la lettre qui a été cliqué dans le modèle,
+ * mais à jour à vue
+ * @param {*} event Permet de retrouver la lettre qui a été cliqué, event.target
+ */
+function onLetterClick(event) {
+  // cache tous les messages
+  view.hideMessages();
+
+  // récupérer la lettre
+  let letter = event.target.textContent;
+
+  // essai de jouer la lettre dans le modèle
+  try {
+    game.playLetter(letter);
+  } catch (e) {
+    view.displayMessage(e.message);
+  }
+
+  view.updateFrom(game);
+}
+
+// **** LES LISTENNERS ****
+
 // appel newGameEvent si click sur le boutton "Lancer une nouvelle partie"
 view.new_game_btn.addEventListener('click', onNewGameEvent);
+
+// ajout de la fonction qui gère le clique sur une lettre
+view.letters_btns.forEach(element => {
+  element.addEventListener('click', onLetterClick);
+});
 

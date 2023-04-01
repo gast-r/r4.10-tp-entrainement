@@ -105,9 +105,30 @@ class Game {
    * @param {string} letter : La lettre jouée
    */
   playLetter(letter) {
-    throw new Error(`(Méthode pas encore implémentée)`);
-
     // TODO Compléter en Partie 1 ...
+
+    // si pas de partie en cours
+    if (!this._gameInProgress) {
+      throw new Error("Pas de partie en cours ! Commencez par lancer une partie.");
+    }
+
+    // une partie est en cours
+    // si la lettre a déjà été joué, lever une exception
+    if (this._usedLetters.includes(letter)) {
+      throw new Error("La lettre " + letter + " a déjà été jouée !");
+    }
+
+    // la lettre n'a pas été jouée
+    // ajouter la lettre aux lettres utilisées
+    this._usedLetters += letter;
+    // si la lettre joué est présente
+    if (this._wordToGuess.includes(letter)) {
+      this.updateWordToDisplay();
+    } else {
+      // on enlève une possibilité d'erreur
+      this._nbErrorsAllowed--;
+    }
+
   }
 
   /**
