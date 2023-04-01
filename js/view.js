@@ -20,33 +20,33 @@ const view = {
   /**
    * Champ texte contenant les indices sur le mot à deviner (la Zone mot).
    */
-  word_input: null,
+  word_input: document.getElementById('zone_mot'),
 
   /**
    * Champ texte contenant les lettres déjà utilisées (la Zone essais).
    */
-  used_letters_input: null,
+  used_letters_input: document.getElementById('zone_essais'),
 
   /**
    * Champ numérique contenant le nombre d'erreurs encore permises.
    */
-  allowed_errors_input: null,
+  allowed_errors_input: document.getElementById('nb_erreurs_permises'),
 
   /**
    * Bouton permettant de lancer une partie.
    */
-  new_game_btn: null,
+  new_game_btn: document.getElementById('boutton_nouvelle_partie'),
 
   /**
    * Collection des boutons représentant le clavier virtuel intégré à la page.
    * (Tous les boutons avec la classe "lettre")
    */
-  letters_btns: null,
+  letters_btns: document.getElementsByClassName('lettre'),
 
   /**
    * Élément <span> affichant le score actuel du joueur.
    */
-  score_span: null,
+  score_span: document.getElementById('score'),
 
   /**
    * Met à jour la vue à partir du modèle.
