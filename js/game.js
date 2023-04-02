@@ -70,7 +70,7 @@ class Game {
       let newWordObject = await response.json();
       return newWordObject;
     } catch (e) {
-      throw new Error(e);
+      return getWord();
     }
   }
 
