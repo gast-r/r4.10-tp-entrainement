@@ -51,6 +51,8 @@ class Game {
     
     // mettre à jour le mot à afficher
     this._displayedWord = this.generateWordToDisplay(this._usedLetters, this._wordToGuess);
+
+    this.saveState();
   }
 
   /**
@@ -148,9 +150,8 @@ class Game {
         // arrêter la partie
         this._gameInProgress = false;
       }
-
     }
-
+    this.saveState();
   }
 
   /**
@@ -158,6 +159,13 @@ class Game {
    */
   saveState() {
     // TODO Compléter en Partie 3 ...
+    // sauvegarde des élément dans le localStorage
+    localStorage.setItem('gameInProgress', this._gameInProgress);
+    localStorage.setItem('wordToGuess', this._wordToGuess);
+    localStorage.setItem('score', this._score);
+    localStorage.setItem('nbErrorsAllowed', this._nbErrorsAllowed);
+    localStorage.setItem('usedLetters', this._usedLetters);
+    localStorage.setItem('displayedWord', this._displayedWord);
   }
 
   /**
@@ -166,5 +174,21 @@ class Game {
    */
   retrieveState() {
     // TODO Compléter en Partie 3 ...
+    
+    // vérifier la présence d'information dans le localStorage
+    if (localStorage.getItem('score') !== null) {
+      // récupérer si une partie est en cours et le score
+      this._score = parseInt(localStorage.getItem('score'));
+      this._gameInProgress = localStorage.getItem('gameInProgress') === 'true';
+      
+      // si une partie en cours, tout mettre à jours
+      // si pas de partie seulement le score aura été mis à jour
+      if (this._gameInProgress) {
+        this._wordToGuess = localStorage.getItem('wordToGuess');
+        this._nbErrorsAllowed = parseInt(localStorage.getItem('nbErrorsAllowed'));
+        this._usedLetters = localStorage.getItem('usedLetters');
+        this._displayedWord = localStorage.getItem('displayedWord');
+      } 
+    }
   }
 }

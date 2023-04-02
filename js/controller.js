@@ -94,6 +94,25 @@ function onLetterClick(event) {
   }
 }
 
+function onDOMLoadEvent(event) {
+  // cache tous les messages
+  view.hideMessages();
+
+  // récupérer le score 
+  let score = localStorage.getItem('score');
+  // si le score existe dans le localStorage
+  if (score) {
+    let answer = view.askIfYesOrNo(`Voulez-vous reprendre la partie ? Votre score est de ${score} point(s).`);
+    // si l'utilisateur veut reprendre la partie
+    if (answer) {
+      game.retrieveState();
+    }
+  }
+
+  // demander à la vue de se mettre à jours
+  view.updateFrom(game);
+}
+
 // **** LES LISTENNERS ****
 
 // appel newGameEvent si click sur le boutton "Lancer une nouvelle partie"
@@ -103,4 +122,7 @@ view.new_game_btn.addEventListener('click', onNewGameEvent);
 view.letters_btns.forEach(element => {
   element.addEventListener('click', onLetterClick);
 });
+
+// ajout de la fonction qui gère le chargement de la page
+document.addEventListener('DOMContentLoaded', onDOMLoadEvent);
 
