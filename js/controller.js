@@ -52,6 +52,8 @@ function onNewGameEvent(event) {
 function onLetterClick(event) {
   // récupérer le nombre de point si fin de partie
   let nbPointBeforePlay = game._score;
+  // récupérer l'état du jeu avant
+  let stateGameBefore = game._gameInProgress;
 
 
   // cache tous les messages
@@ -73,8 +75,10 @@ function onLetterClick(event) {
   // gérer la fin d'une partie
   let nbPointAfterPlay = game._score;
   let diffPoint = nbPointAfterPlay - nbPointBeforePlay;
-  // partie finie
-  if (game._gameInProgress === false) {
+  // récupérer l'état du jeu après
+  let stateGameAfter = game._gameInProgress;
+  // partie terminé si les états avant et après sont différents
+  if (stateGameBefore !== stateGameAfter) {
     // si la partie est gagnante
     if (game._wordToGuess == game._displayedWord) {
       view.displayMessage(
