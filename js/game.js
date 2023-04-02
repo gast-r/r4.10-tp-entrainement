@@ -22,7 +22,7 @@ class Game {
   /**
    * Lance une nouvelle partie (s'il n'y a pas déjà une partie en cours).
    */
-  launchNewGame() {
+  async launchNewGame() {
     // TODO Compléter en Partie 1 ...
 
     // si une partie est déjà en cours
@@ -31,11 +31,12 @@ class Game {
     }
 
     // pas de partie en cours
+    // récupérer le mot à faire deviner
+    let wordToGuessObject = await this.getNewWordObject();
+
     // définir la partie comme en cours
     this._gameInProgress = true;
 
-    // récupérer le mot à faire deviner
-    let wordToGuessObject = this.getNewWordObject();
     // mettre à jours le modèle
     // le mot à deviner
     this._wordToGuess = wordToGuessObject.mot;
@@ -57,11 +58,18 @@ class Game {
    * (Une 1ère version de cette méthode vous est fournie, mais vous devrez la modifier par la suite.)
    * @returns {object} Un objet contenant le mot et le nombre d'essais autorisés pour ce mot
    */
-  getNewWordObject() {
-    // Retourne (pour l'instant) le mot "ELEPHANT"
-    return { mot: "ELEPHANT", nb_essais: 6 };
-
+  async getNewWordObject() {
     // TODO Modifier en Partie 2 ...
+    try {
+      const response = await fetch('api/generation.php')
+      if (!response.ok) {
+        throw new Error(`HTTP error : status --> ${response.status}`);
+      }
+      let newWordObject = await response.json();
+      return newWordObject;
+    } catch (e) {
+      throw new Error(e);
+    }
   }
 
   /**

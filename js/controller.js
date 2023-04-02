@@ -28,13 +28,13 @@ document.addEventListener("DOMContentLoaded", () => {
  * Cache les message dans la vue et lance une nouvelle partie.
  * @param {*} event 
  */
-function onNewGameEvent(event) {
+async function onNewGameEvent(event) {
   // cache tous les messages
   view.hideMessages();
 
   // lance une nouvelle partie dans le modèle
   try {
-    game.launchNewGame();
+    await game.launchNewGame();
   } catch (e) {
     view.displayMessage(e.message);
   }
